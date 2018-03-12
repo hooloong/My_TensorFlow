@@ -44,7 +44,7 @@ def create_lexicon(pos_file, neg_file):
     lex = [lemmatizer.lemmatize(word) for word in lex]  # 词形还原 (cats->cat)
 
     word_count = Counter(lex)
-    # print(word_count)
+    print(word_count)
     # {'.': 13944, ',': 10536, 'the': 10120, 'a': 9444, 'and': 7108, 'of': 6624, 'it': 4748, 'to': 3940......}
     # 去掉一些常用词,像the,a and等等，和一些不常用词; 这些词对判断一个评论是正面还是负面没有做任何贡献
     lex = []
@@ -88,7 +88,7 @@ def normalize_dataset(lex):
             one_sample = string_to_vector(lex, line, [0, 1])  # [array([ 0.,  0.,  0., ...,  0.,  0.,  0.]), [0,1]]]
             dataset.append(one_sample)
 
-    # print(len(dataset))
+    print(len(dataset))
     return dataset
 
 
