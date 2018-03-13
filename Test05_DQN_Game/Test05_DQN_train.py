@@ -132,7 +132,7 @@ def train_neural_network(input_image):
     argmax = tf.placeholder("float", [None, output])
     gt = tf.placeholder("float", [None])
 
-    action = tf.reduce_sum(tf.mul(predict_action, argmax), reduction_indices=1)
+    action = tf.reduce_sum(tf.multiply(predict_action, argmax), reduction_indices=1)
     cost = tf.reduce_mean(tf.square(action - gt))
     optimizer = tf.train.AdamOptimizer(1e-6).minimize(cost)
 
