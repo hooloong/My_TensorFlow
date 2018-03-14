@@ -201,7 +201,7 @@ def train_neural_network(input_image):
             n = n + 1
 
             if n % 10000 == 0:
-                saver.save(sess, 'game.cpk', global_step=n)  # 保存模型
+                saver.save(sess, './game.cpk', global_step=n)  # 保存模型
 
             print(n, "epsilon:", epsilon, " ", "action:", maxIndex, " ", "reward:", reward)
 
