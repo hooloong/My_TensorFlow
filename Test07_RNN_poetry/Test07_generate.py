@@ -119,7 +119,7 @@ def gen_poetry():
         sess.run(tf.initialize_all_variables())
 
         saver = tf.train.Saver(tf.all_variables())
-        saver.restore(sess, 'poetry.module-49')
+        saver.restore(sess, 'poetry.module-7')
 
         state_ = sess.run(cell.zero_state(1, tf.float32))
 

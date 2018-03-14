@@ -1,7 +1,7 @@
 import collections
 import numpy as np
 import tensorflow as tf
-
+import time
 # -------------------------------数据预处理---------------------------#
 
 poetry_file = 'poetry.txt'
@@ -120,7 +120,7 @@ def gen_poetry_with_head(head):
         sess.run(tf.initialize_all_variables())
 
         saver = tf.train.Saver(tf.all_variables())
-        saver.restore(sess, 'poetry.module-49')
+        saver.restore(sess, 'poetry.module-7')
 
         state_ = sess.run(cell.zero_state(1, tf.float32))
         poem = ''
@@ -140,4 +140,4 @@ def gen_poetry_with_head(head):
         return poem
 
 
-print(gen_poetry_with_head('一二三四'))
+print(gen_poetry_with_head('爱情深切'))
