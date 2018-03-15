@@ -1,0 +1,6 @@
+model_checkpoint_path: "girl.ckpt-49"
+all_model_checkpoint_paths: "girl.ckpt-21"
+all_model_checkpoint_paths: "girl.ckpt-28"
+all_model_checkpoint_paths: "girl.ckpt-35"
+all_model_checkpoint_paths: "girl.ckpt-42"
+all_model_checkpoint_paths: "girl.ckpt-49"

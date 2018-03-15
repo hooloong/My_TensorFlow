@@ -34,12 +34,16 @@ else:
     image_channel = 3
 
     # 每次使用多少样本训练
-    batch_size = 128
+    batch_size = 64
     n_batches = len(picture_list) // batch_size
 
     # 图片格式对应输入X
     img_data = []
+    cnt = 0
     for img_file in picture_list:
+        cnt += 1
+        # if cnt >= 1000:
+        #     break
         img_data.append(cv2.imread(img_file))
     img_data = np.array(img_data)
     img_data = img_data / 255.0
@@ -136,7 +140,7 @@ def train_pixel_cnn():
     output = pixel_cnn()
 
     loss = tf.reduce_mean(
-        tf.nn.sparse_softmax_cross_entropy_with_logits(output, tf.cast(tf.reshape(X, [-1]), dtype=tf.int32)))
+        tf.nn.sparse_softmax_cross_entropy_with_logits(logits=output, labels=tf.cast(tf.reshape(X, [-1]), dtype=tf.int32)))
     trainer = tf.train.RMSPropOptimizer(1e-3)
     gradients = trainer.compute_gradients(loss)
     clipped_gradients = [(tf.clip_by_value(_[0], -1, 1), _[1]) for _ in gradients]
@@ -159,11 +163,11 @@ def train_pixel_cnn():
                 _, cost = sess.run([optimizer, loss], feed_dict={X: batch_X})
                 print("epoch:", epoch, '  batch:', batch, '  cost:', cost)
             if epoch % 7 == 0:
-                saver.save(sess, "girl.ckpt", global_step=epoch)
+                saver.save(sess, "./girl.ckpt", global_step=epoch)
 
 
 # 训练
-train_pixel_cnn()
+# train_pixel_cnn()
 
 
 def generate_girl():
@@ -176,7 +180,7 @@ def generate_girl():
         sess.run(tf.initialize_all_variables())
 
         saver = tf.train.Saver(tf.trainable_variables())
-        saver.restore(sess, 'girl.ckpt-49')
+        saver.restore(sess, './girl.ckpt-42')
 
         pics = np.zeros((1 * 1, image_height, image_width, image_channel), dtype=np.float32)
 
@@ -186,7 +190,7 @@ def generate_girl():
                     next_pic = sess.run(predict, feed_dict={X: pics})
                     pics[:, i, j, k] = next_pic[:, i, j, k]
 
-        cv2.imwrite('girl.jpg', pics[0])
+        cv2.imwrite('./girl.jpg', pics[0])
         print('生成妹子图: girl.jpg')
 
 
