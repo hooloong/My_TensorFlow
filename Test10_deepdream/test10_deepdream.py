@@ -81,16 +81,17 @@ def deep_dream(obj, img_noise=np.random.uniform(size=(224, 224, 3)) + 100.0, ite
             img += g * (step / (np.abs(g).mean() + 1e-7))
 
         # 保存图像
-        output_file = 'output' + str(octave + 1) + '.jpg'
+        output_file = './output' + str(octave + 1) + '.jpg'
         cv2.imwrite(output_file, img)
         print(output_file)
 
 
 # 加载输入图像
-input_img = cv2.imread('input.jpg')
+input_img = cv2.imread('./19.jpg')
 input_img = np.float32(input_img)
-
+print(input_img.shape)
+#input_img = np.int(input_img)
 # 选择层
-layer = 'mixed4c'
+layer = 'mixed4d'
 
 deep_dream(tf.square(graph.get_tensor_by_name("import/%s:0" % layer)), input_img)
