@@ -5,7 +5,8 @@ from collections import Counter
 import librosa  # https://github.com/librosa/librosa
 
 # 训练样本路径
-wav_path = '../../data/speech/train/wav/train'
+# wav_path = '../../data/speech/train/wav/train'
+wav_path = 'U:/imagenet/train'
 label_file = '../../data/speech/train.word.txt'
 
 
@@ -170,7 +171,7 @@ def aconv1d_layer(input_tensor, size, rate, activation, scale, bias):
             mean_running = tf.get_variable('mean', shape[-1], dtype=tf.float32, initializer=tf.constant_initializer(0))
             variance_running = tf.get_variable('variance', shape[-1], dtype=tf.float32,
                                                initializer=tf.constant_initializer(1))
-            mean, variance = tf.nn.moments(out, axes=range(len(out.get_shape()) - 1))
+            mean, variance = tf.nn.moments(out, axes=list(range(len(out.get_shape()) - 1)))
 
             def update_running_stat():
                 decay = 0.99
@@ -252,7 +253,7 @@ def train_speech_to_text_network():
 
     # CTC loss
     indices = tf.where(tf.not_equal(tf.cast(Y, tf.float32), 0.))
-    target = tf.SparseTensor(indices=indices, values=tf.gather_nd(Y, indices) - 1, shape=tf.cast(tf.shape(Y), tf.int64))
+    target = tf.SparseTensor(indices=indices, values=tf.gather_nd(Y, indices) - 1, dense_shape=tf.cast(tf.shape(Y), tf.int64))
     loss = tf.nn.ctc_loss(logit, target, sequence_len, time_major=False)
     # optimizer
     lr = tf.Variable(0.001, dtype=tf.float32, trainable=False)
