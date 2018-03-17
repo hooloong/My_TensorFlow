@@ -1,5 +1,8 @@
+# coding=utf-8
 import os
 import random
+import sys
+
 
 conv_path = 'dgk_shooter_min.conv'
 
@@ -44,9 +47,13 @@ E
 
 # 我首先使用文本编辑器sublime把dgk_shooter_min.conv文件编码转为UTF-8，一下子省了不少麻烦
 convs = []  # 对话集合
-with open(conv_path, encoding="utf8") as f:
+with open(conv_path,  "r", encoding='utf-8',) as f:
     one_conv = []  # 一次完整对话
+    cnt = 0
     for line in f:
+        cnt += 1
+        # print(line)
+        # print(cnt)
         line = line.strip('\n').replace('/', '')
         if line == '':
             continue
@@ -88,10 +95,10 @@ print(response[:3])
 
 def convert_seq2seq_files(questions, answers, TESTSET_SIZE=8000):
     # 创建文件
-    train_enc = open('train.enc', 'w')  # 问
-    train_dec = open('train.dec', 'w')  # 答
-    test_enc = open('test.enc', 'w')  # 问
-    test_dec = open('test.dec', 'w')  # 答
+    train_enc = open('train.enc', 'w',encoding="utf-8")  # 问
+    train_dec = open('train.dec', 'w',encoding="utf-8")  # 答
+    test_enc = open('test.enc', 'w',encoding="utf-8")  # 问
+    test_dec = open('test.dec', 'w',encoding="utf-8")  # 答
 
     # 选择20000数据作为测试数据
     test_index = random.sample([i for i in range(len(questions))], TESTSET_SIZE)
