@@ -72,12 +72,12 @@ labels_vector = [list(map(to_num, label)) for label in labels]
 label_max_len = np.max([len(label) for label in labels_vector])
 print('最长句子的字数:', label_max_len)
 
-wav_max_len = 0  # 673
-for wav in wav_files:
-    wav, sr = librosa.load(wav, mono=True)
-    mfcc = np.transpose(librosa.feature.mfcc(wav, sr), [1, 0])
-    if len(mfcc) > wav_max_len:
-        wav_max_len = len(mfcc)
+wav_max_len = 673  # 673, 下面这个操作太浪费时间了,只能用cpu算！只用运行一次。记住这个值吧
+# for wav in wav_files:
+#     wav, sr = librosa.load(wav, mono=True)
+#     mfcc = np.transpose(librosa.feature.mfcc(wav, sr), [1, 0])
+#     if len(mfcc) > wav_max_len:
+#         wav_max_len = len(mfcc)
 print("最长的语音:", wav_max_len)
 
 batch_size = 16
@@ -254,7 +254,7 @@ def train_speech_to_text_network():
     # CTC loss
     indices = tf.where(tf.not_equal(tf.cast(Y, tf.float32), 0.))
     target = tf.SparseTensor(indices=indices, values=tf.gather_nd(Y, indices) - 1, dense_shape=tf.cast(tf.shape(Y), tf.int64))
-    loss = tf.nn.ctc_loss(logit, target, sequence_len, time_major=False)
+    loss = tf.nn.ctc_loss(inputs=logit, labels=target, sequence_length=sequence_len, time_major=False)
     # optimizer
     lr = tf.Variable(0.001, dtype=tf.float32, trainable=False)
     optimizer = MaxPropOptimizer(learning_rate=lr, beta2=0.99)
