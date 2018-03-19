@@ -1,0 +1,5 @@
+model_checkpoint_path: "speech.module-15"
+all_model_checkpoint_paths: "speech.module-0"
+all_model_checkpoint_paths: "speech.module-5"
+all_model_checkpoint_paths: "speech.module-10"
+all_model_checkpoint_paths: "speech.module-15"

@@ -277,7 +277,7 @@ def train_speech_to_text_network():
                 train_loss, _ = sess.run([loss, optimizer_op], feed_dict={X: batches_wavs, Y: batches_labels})
                 print(epoch, batch, train_loss)
             if epoch % 5 == 0:
-                saver.save(sess, 'speech.module', global_step=epoch)
+                saver.save(sess, './speech.module', global_step=epoch)
 
 
 # 训练
@@ -300,4 +300,6 @@ def speech_to_text(wav_file):
         decoded, _ = tf.nn.ctc_beam_search_decoder(decoded, sequence_len, merge_repeated=False)
         predict = tf.sparse_to_dense(decoded[0].indices, decoded[0].shape, decoded[0].values) + 1
         output = sess.run(decoded, feed_dict={X: mfcc})
-        # print(output)
+        print(output)
+# testing_file = "../../data/speech/train/wav/train/B11_250.wav"
+# speech_to_text(testing_file)
