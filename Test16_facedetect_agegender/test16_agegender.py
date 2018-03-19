@@ -177,7 +177,7 @@ def training():
                 batch_x, batch_y = get_next_batch(data_set, batch_size)
                 _, loss_value = sess.run([train_op, total_loss], feed_dict={X: batch_x, Y: batch_y})
                 print(epoch, batch, loss_value)
-            saver.save(sess, 'age.module' if AGE == True else 'sex.module')
+            saver.save(sess, './age.module' if AGE == True else './sex.module')
             epoch += 1
 
 
