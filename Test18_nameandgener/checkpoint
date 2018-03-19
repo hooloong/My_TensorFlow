@@ -1,0 +1,6 @@
+model_checkpoint_path: "name2sex.model-200"
+all_model_checkpoint_paths: "name2sex.model-0"
+all_model_checkpoint_paths: "name2sex.model-50"
+all_model_checkpoint_paths: "name2sex.model-100"
+all_model_checkpoint_paths: "name2sex.model-150"
+all_model_checkpoint_paths: "name2sex.model-200"
