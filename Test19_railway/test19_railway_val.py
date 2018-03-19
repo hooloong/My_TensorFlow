@@ -6,11 +6,11 @@ import requests
 import io
 
 # 加载数据
-url = 'http://blog.topspeedsnail.com/wp-content/uploads/2016/12/铁路客运量.csv'
-ass_data = requests.get(url).content
-
-df = pd.read_csv(io.StringIO(ass_data.decode('utf-8')))  # python2使用StringIO.StringIO
-
+# url = 'http://blog.topspeedsnail.com/wp-content/uploads/2016/12/铁路客运量.csv'
+# ass_data = requests.get(url).content
+#
+# df = pd.read_csv(io.StringIO(ass_data.decode('utf-8')))  # python2使用StringIO.StringIO
+df = pd.read_csv('./railway.csv',encoding='utf-8')
 data = np.array(df['铁路客运量_当期值(万人)'])
 # normalize
 normalized_data = (data - np.mean(data)) / np.std(data)
@@ -33,7 +33,7 @@ def ass_rnn(hidden_layer_size=6):
     cell = tf.nn.rnn_cell.BasicLSTMCell(hidden_layer_size)
     outputs, states = tf.nn.dynamic_rnn(cell, X, dtype=tf.float32)
     W_repeated = tf.tile(tf.expand_dims(W, 0), [tf.shape(X)[0], 1, 1])
-    out = tf.batch_matmul(outputs, W_repeated) + b
+    out = tf.matmul(outputs, W_repeated) + b
     out = tf.squeeze(out)
     return out
 
@@ -54,7 +54,7 @@ def train_rnn():
             if step % 10 == 0:
                 # 用测试数据评估loss
                 print(step, loss_)
-        print("保存模型: ", saver.save(sess, 'ass.model'))
+        print("保存模型: ", saver.save(sess, './ass.model'))
 
 
 # train_rnn()

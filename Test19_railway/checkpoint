@@ -1,0 +1,2 @@
+model_checkpoint_path: "ass.model"
+all_model_checkpoint_paths: "ass.model"
