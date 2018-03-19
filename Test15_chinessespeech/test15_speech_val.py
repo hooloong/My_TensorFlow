@@ -80,7 +80,7 @@ wav_max_len = 673  # 673, 下面这个操作太浪费时间了,只能用cpu算�
 #         wav_max_len = len(mfcc)
 print("最长的语音:", wav_max_len)
 
-batch_size = 16
+batch_size = 1
 n_batch = len(wav_files) // batch_size
 
 # 获得一个batch
@@ -301,5 +301,7 @@ def speech_to_text(wav_file):
         predict = tf.sparse_to_dense(decoded[0].indices, decoded[0].dense_shape, decoded[0].values) + 1
         output = sess.run(decoded, feed_dict={X: mfcc})
         print(output)
-testing_file = "../../data/speech/train/wav/train/B11/B11_250.wav"
+        msg = ''.join([words[n] for n in output[0][1]])
+        print(msg)
+testing_file = "../../data/speech/train/wav/train/A11/A11_0.wav"
 speech_to_text(testing_file)
