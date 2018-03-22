@@ -4,6 +4,7 @@ import struct
 import PIL.Image
 #http://www.nlpr.ia.ac.cn/databases/download/feature_data/HWDB1.1trn_gnt.zip
 #http://www.nlpr.ia.ac.cn/databases/download/feature_data/HWDB1.1tst_gnt.zip
+# 格式提取工具https://github.com/QiaXi/GntDecoder
 train_data_dir = "../../data/HWDB1.1trn_gnt"
 test_data_dir = "../../data/HWDB1.1tst_gnt"
 
@@ -136,22 +137,22 @@ def chinese_hand_write_cnn():
 def train_hand_write_cnn():
     output = chinese_hand_write_cnn()
 
-    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(output, Y))
+    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=output, labels=Y))
     optimizer = tf.train.AdamOptimizer(learning_rate=0.001).minimize(loss)
 
     accuracy = tf.reduce_mean(tf.cast(tf.equal(tf.argmax(output, 1), tf.argmax(Y, 1)), tf.float32))
 
     # TensorBoard
-    tf.scalar_summary("loss", loss)
-    tf.scalar_summary("accuracy", accuracy)
-    merged_summary_op = tf.merge_all_summaries()
+    tf.summary.scalar("loss", loss)
+    tf.summary.scalar("accuracy", accuracy)
+    merged_summary_op = tf.summary.merge_all()
 
     saver = tf.train.Saver()
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
 
         # 命令行执行 tensorboard --logdir=./log  打开浏览器访问http://0.0.0.0:6006
-        summary_writer = tf.train.SummaryWriter('./log', graph=tf.get_default_graph())
+        summary_writer = tf.summary.FileWriter('./log', graph=tf.get_default_graph())
 
         for e in range(50):
             for i in range(num_batch):

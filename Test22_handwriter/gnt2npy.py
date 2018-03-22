@@ -8,7 +8,7 @@ import os
 import struct
 import sys
 import zipfile
-
+#http://www.nlpr.ia.ac.cn/databases/handwriting/Download.html
 def gnt2npy(src_file, dst_file, image_size, map_file):
     '''
     将gnt文件存为npy格式
@@ -38,7 +38,7 @@ def gnt2npy(src_file, dst_file, image_size, map_file):
             print("processing %s ..." % file_name)
             data_file = zip_file.open(file_name)
             total_bytes = zip_file.getinfo(file_name).file_size
-            image_list, label_list, code_map = readFromGnt(data_file, file_name, image_size, total_bytes, code_map)
+            image_list, label_list, code_map = readFromGnt(data_file,  image_size, total_bytes, code_map)
             images += image_list
             labels += label_list
     elif os.path.isdir(src_file): #包含gnt文件的文件夹
