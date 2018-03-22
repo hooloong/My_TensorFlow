@@ -112,7 +112,7 @@ def chinese_hand_write_cnn():
     conv2 = tf.nn.max_pool(conv2, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
 
     """
-    # 训练开始之后我就去睡觉了, 早晨起来一看, 白跑了, 准确率不足10%; 把网络变量改少了再来一发
+    #理论上从 paper上介绍可以再加层层数
     w_c3 = tf.Variable(tf.random_normal([3, 3, 64, 128], stddev=0.01))
     b_c3 = tf.Variable(tf.zeros([128]))
     conv3 = tf.nn.relu(tf.nn.bias_add(tf.nn.conv2d(conv2, w_c3, strides=[1, 1, 1, 1], padding='SAME'), b_c3))
