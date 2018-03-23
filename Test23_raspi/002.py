@@ -2,9 +2,9 @@ import cv2
 import os
 import sys
 
-IMAGE_DIR = '../../data-set/pe'
+IMAGE_DIR = '../../data/my_faces'
 
-OUTPUT_DIR = './others_face'
+OUTPUT_DIR = '../../data/others'
 if not os.path.exists(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)
 

@@ -2,7 +2,7 @@ import cv2
 import os
 import sys
 
-OUTPUT_DIR = './my_faces'
+OUTPUT_DIR = '../../my_faces'
 if not os.path.exists(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)
 
