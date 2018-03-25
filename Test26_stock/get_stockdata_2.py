@@ -11,5 +11,7 @@ sdhj_df = pd.DataFrame(e)
 # sdhj_df.to_csv("SDHJ_stock_data1.csv",index=False)
 sdhj_df = sdhj_df.iloc[::-1]
 print(sdhj_df)
-sdhj_df.to_csv("SDHJ_stock_data.csv")
+sdhj_df.to_csv("SDHJ_stock_data.csv",index=False,index_label=False)
+
+
 
