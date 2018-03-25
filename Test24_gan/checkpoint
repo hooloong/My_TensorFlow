@@ -1,2 +1,6 @@
-model_checkpoint_path: "celeba.model-0"
-all_model_checkpoint_paths: "celeba.model-0"
+model_checkpoint_path: "celeba.model-97200"
+all_model_checkpoint_paths: "celeba.model-96800"
+all_model_checkpoint_paths: "celeba.model-96900"
+all_model_checkpoint_paths: "celeba.model-97000"
+all_model_checkpoint_paths: "celeba.model-97100"
+all_model_checkpoint_paths: "celeba.model-97200"
