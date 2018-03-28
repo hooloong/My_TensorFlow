@@ -39,7 +39,7 @@ def train(mnist):
     y = inference(x, None, weights1, biases1, weights2, biases2)
 
     # 定义训练轮数及相关的滑动平均类
-    global_step = tf.Variable(0, trainable=False)
+    global_step = tf.Variable(0, trainable=False) #global steps变量和网络无关，主要是不让纳入colletction
     variable_averages = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY, global_step)
     variables_averages_op = variable_averages.apply(tf.trainable_variables())
     average_y = inference(x, variable_averages, weights1, biases1, weights2, biases2)
