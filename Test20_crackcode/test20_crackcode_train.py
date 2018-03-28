@@ -135,6 +135,7 @@ def crack_captcha_cnn(w_alpha=0.01, b_alpha=0.1):
     # out_alpha = np.sqrt(2.0/1024)
 
     # 3 conv layer
+
     w_c1 = tf.Variable(w_alpha * tf.random_normal([3, 3, 1, 32]))
     b_c1 = tf.Variable(b_alpha * tf.random_normal([32]))
     conv1 = tf.nn.relu(tf.nn.bias_add(tf.nn.conv2d(x, w_c1, strides=[1, 1, 1, 1], padding='SAME'), b_c1))
