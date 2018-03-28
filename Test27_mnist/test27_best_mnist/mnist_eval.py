@@ -34,7 +34,7 @@ def evaluate(mnist):
             time.sleep(EVAL_INTERVAL_SECS)
 
 def main(argv=None):
-    mnist = input_data.read_data_sets("../../../datasets/MNIST_data", one_hot=True)
+    mnist = input_data.read_data_sets("../../../data/MNIST_data", one_hot=True)
     evaluate(mnist)
 
 if __name__ == '__main__':
