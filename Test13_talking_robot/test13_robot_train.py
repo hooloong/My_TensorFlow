@@ -1,7 +1,7 @@
 import tensorflow as tf  # 0.12
 #from tensorflow.models.tutorials.rnn.translate import seq2seq_model
 # from tensorflow.contrib.legacy_seq2seq  import seq2seq.model
-# from seq2seq_model import *
+import  seq2seq_model
 import  tensorflow.contrib.seq2seq as Seq2SeqModel
 import numpy as np
 import math
@@ -46,7 +46,7 @@ def read_data(source_path, target_path, max_size=None):
     return data_set
 
 
-model = Seq2SeqModel(source_vocab_size=vocabulary_encode_size, target_vocab_size=vocabulary_decode_size,
+model = seq2seq_model.Seq2SeqModel(source_vocab_size=vocabulary_encode_size, target_vocab_size=vocabulary_decode_size,
                                    buckets=buckets, size=layer_size, num_layers=num_layers, max_gradient_norm=5.0,
                                    batch_size=batch_size, learning_rate=0.5, learning_rate_decay_factor=0.97,
                                    forward_only=False)

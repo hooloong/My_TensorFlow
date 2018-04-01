@@ -8,7 +8,7 @@ import numpy as np
 from six.moves import xrange
 import tensorflow as tf
 import seq2seq
-import generate_chat 
+import generate_chat
 
 
 class Seq2SeqModel(object):
